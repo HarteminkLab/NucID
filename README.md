@@ -16,3 +16,10 @@ then
 ```bash
 cd NucID && python setup.py install
 ```
+
+## Pre-computed genome-wide nucleosome scores
+We provide pre-computed genome-wide nucleosome scores for both *`S. cerevisiae`* genome (sacCer2) and *`human`* genome (hg18), available at:
+  * [sacCer2](http://trackhub.genome.duke.edu/harteminklab/NucID/sacCer2/)
+  * [hg18](http://trackhub.genome.duke.edu/harteminklab/NucID/hg18/)
+
+Both were computed using the code here. 
