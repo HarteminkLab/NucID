@@ -38,7 +38,7 @@
 
 <ul>
 <li>Using DNase-seq data, a Bayes-factor-based nucleosome score can be calculated for any 147 base pair genomic window. </li>
-<li>Genome-wide nucleosome scores are then determined by applying a simple sliding window approach. </li>
+<li>Genome-wide nucleosome scores are then determined by applying a simple moving window approach. </li>
 <li>Finally, a greedy algorithm maps nucleosomes using these genome-wide nucleosome scores.</li>
 </ul>
 
@@ -52,6 +52,11 @@
 <p>then</p>
 
 <div class="highlight highlight-source-shell"><pre><span class="pl-c1">cd</span> NucID <span class="pl-k">&amp;&amp;</span> python setup.py install</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p><a href="https://github.com/jianlingzhong/NucID/blob/master/example/example.ipynb">example.ipynb</a> contains an example on how to calculate moving window nucleosome scores. Each file in the <a href="https://github.com/jianlingzhong/NucID/tree/master/NucID">package</a> has an accompany <code>IPython</code> notebook that explains the code. </p>
 
 <h2>
 <a id="pre-computed-genome-wide-nucleosome-scores" class="anchor" href="#pre-computed-genome-wide-nucleosome-scores" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre-computed genome-wide nucleosome scores</h2>
