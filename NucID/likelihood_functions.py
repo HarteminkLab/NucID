@@ -1,23 +1,19 @@
-# -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
 
-# <codecell>
+# coding: utf-8
+
+# In[1]:
 
 import numpy as np
 import warnings
 import numerical_methods as num
 import parameters as para
-reload(para)
 
-# <markdowncell>
 
 # ##Parameterized mean curve as $e^a + expb \times (j - c)^2 + \lambda_j$
 
-# <markdowncell>
+# where $expb = e^b$. $c$ is always set to 0 here.
 
-# where $expb = e^b$. 
-
-# <codecell>
+# In[ ]:
 
 def dnase_asinh_normalLogLik_quadmean_expa_with_oscillation(
         a, dnase_asinh, oscillation, expb = 0, c = 0, k = 1):
@@ -37,11 +33,10 @@ def dnase_asinh_normalLogLik_quadmean_expa_with_oscillation(
 
     return num.matrix_normal_logpdf(dnase_asinh, mu, sd)
 
-# <markdowncell>
 
 # ##Use the same likelihood function as above, but with $a$ integrated out
 
-# <codecell>
+# In[ ]:
 
 def dnase_asinh_normalLogLik_quadmean_expa_marginala_with_oscillation_integrand(
         a, dnase_asinh, oscillation, expb = 0, c = 0, k = 1, mu_a = 0, sd_a = 1,
@@ -88,25 +83,61 @@ def dnase_asinh_normalLogLik_quadmean_expa_marginal_overa_with_oscillation(
     
     return int_res[0]
 
-# <headingcell level=1>
 
-# Use the same likelihood function as above, but with both $a$ and $b$ integrated out
+## Use the same likelihood function as above, but with both $a$ and $b$ integrated out
 
-# <codecell>
+# This requires the [cubature](https://github.com/saullocastro/cubature) package.
+
+# In[ ]:
+
+# integrand for the cubature package
+def dnase_asinh_normalLogLik_quadmean_expab_marginalab_integrand(theta, dnase_asinh, adjustment = 0, c = 0, k = 1, 
+                                                               mu_a = 0, sd_a = 1, mu_b = 0, sd_b = 1,
+                                                               log = False):
+    '''
+    dnase_asinh: n x (2J+1) matrix
+    theta = [a,b]
+    '''
+
+    aa = theta[0]; bb = theta[1]
+    log_integrand1 = dnase_asinh_normalLogLik_quadmean_expab(theta, dnase_asinh, c = c, k = k)
+    log_integrand2 = num.normal_logpdf(aa, mu_a, sd_a)
+    log_integrand3 = num.normal_logpdf(bb, mu_b, sd_b)
+    log_integrand = log_integrand1 + log_integrand2 + log_integrand3 - adjustment
+    
+    if log:
+        return np.array([log_integrand])
+    else:
+        return np.array([np.exp(log_integrand)])
 
 
-# <markdowncell>
+def dnase_asinh_normalLogLik_quadmean_expab_marginal_overab(dnase_asinh, c = 0, k = 1, 
+                                                            mu_a = 0, sd_a = 1, mu_b = 0, sd_b = 1
+                                                            ):
+    
+    import cubature as cuba
+        
+    # integration rectangle for a and b
+    xmin = np.array([mu_a - 5*sd_a, mu_b - 5 * sd_b], float); xmax = np.array([mu_a + 5*sd_a, mu_b + 5*sd_b], float)
+    
+    int_res = cuba.cubature(2, dnase_asinh_normalLogLik_quadmean_expab_marginalab_integrand, xmin = xmin, xmax = xmax, 
+                  adaptive = 'h', abserr = 0.0, relerr = 1e-5, args = tuple([dnase_asinh, 0, c, k, mu_a, sd_a, mu_b, sd_b]))
+    
+    
+    if int_res[0][0] / int_res[1][0] < 1e4:
+        warnings.warn('integration relative error larger than 1e-4')
+    
+    return np.log(int_res[0][0])
+
 
 # ##Bayes factor
 
-# <markdowncell>
-
 # A function to facilitate the calculation of Bayes factor, using the following:
 #   * Default parameters from Crawford data in ***```parameters.py```***.
-#   * The likelihood is ***```dnase_asinh_normalLogLik_quadmean_expa_marginal_overa_with_oscillation```***. Mean curve is parameterized as $e^a + expb \times j^2 + \lambda_j$, where $a$ is integrated out, $expb$ is fixed at MLE and $\lambda_j$ is the detrended oscillation pattern.
+#   * The likelihood is ***```dnase_asinh_normalLogLik_quadmean_expa_marginal_overa_with_oscillation```*** (defined above). Mean curve is parameterized as $e^a + expb \times j^2 + \lambda_j$, where $a$ is integrated out, $expb$ is fixed at MLE and $\lambda_j$ is the detrended oscillation pattern.
 #   
 
-# <codecell>
+# In[4]:
 
 def bayes_factor_marginal_over_a(dnase_asinh):
     
