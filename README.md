@@ -1,5 +1,5 @@
-# NucID: Nucleosome Identification using DNase-seq
-NucID is a Python package for identifying nucleosome positions from single-end DNase-seq data:
+# `NucID`: Nucleosome Identification using DNase-seq
+`NucID` is a Python package for identifying nucleosome positions from single-end DNase-seq data:
   * Using DNase-seq data, a Bayes-factor-based nucleosome score can be calculated for any 147 base pair genomic window. 
   * Genome-wide nucleosome scores are then determined by applying a simple moving window approach. 
   * Finally, a greedy algorithm maps nucleosomes using these genome-wide nucleosome scores.
@@ -26,3 +26,8 @@ We provide pre-computed genome-wide nucleosome scores for both *`S. cerevisiae`*
   * [hg18](http://trackhub.genome.duke.edu/harteminklab/NucID/hg18/)
 
 Both were computed using the code here. 
+
+## Reference
+`NucID` was developped by [Jianling Zhong](https://github.com/jianlingzhong) in the Hartemink Lab for the following publication:
+
+[Zhong, J., Luo, K., Winter, P. S., Crawford, G. E., Iversen E. S., & Hartemink, A. J. (2016). Mapping nucleosome positions using DNase-seq. Genome Res. gr.195602.115](http://genome.cshlp.org/content/early/2016/01/15/gr.195602.115.abstract)
