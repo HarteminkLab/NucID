@@ -8,7 +8,7 @@
 Clone this repository
 
 ```bash
-git clone git@github.com:jianlingzhong/NucID.git
+git clone git@github.com:HarteminkLab/NucID.git
 ```
 
 then
@@ -18,7 +18,7 @@ cd NucID && python setup.py install
 ```
 
 ## Usage
-[example.ipynb](https://github.com/jianlingzhong/NucID/blob/master/example/example.ipynb) contains an example on how to calculate moving window nucleosome scores. Each file in the [package](https://github.com/jianlingzhong/NucID/tree/master/NucID) has an accompany `IPython` notebook that explains the code. 
+[example.ipynb](https://github.com/HarteminkLab/NucID/blob/master/example/example.ipynb) contains an example on how to calculate moving window nucleosome scores. Each file in the [package](https://github.com/HarteminkLab/NucID/tree/master/NucID) has an accompany `IPython` notebook that explains the code. 
 
 ## Pre-computed genome-wide nucleosome scores
 We provide pre-computed genome-wide nucleosome scores for both *`S. cerevisiae`* genome (sacCer2) and *`human`* genome (hg18), available at:
@@ -28,6 +28,6 @@ We provide pre-computed genome-wide nucleosome scores for both *`S. cerevisiae`*
 Both were computed using the code here. 
 
 ## Reference
-`NucID` was developped by [Jianling Zhong](https://github.com/jianlingzhong) in the Hartemink Lab for the following publication:
+`NucID` was developed by [Jianling Zhong](https://github.com/jianlingzhong) in the Hartemink Lab for the following publication:
 
 [Zhong, J., Luo, K., Winter, P. S., Crawford, G. E., Iversen E. S., & Hartemink, A. J. (2016). Mapping nucleosome positions using DNase-seq. Genome Res. gr.195602.115](http://genome.cshlp.org/content/early/2016/01/15/gr.195602.115.abstract)
