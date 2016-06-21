@@ -17,6 +17,12 @@ then
 cd NucID && python setup.py install
 ```
 
+## Dependencies 
+`NucID` depends on the following Python packages:
+* Numpy
+* Scipy
+* Pandas
+
 ## Usage
 [example.ipynb](https://github.com/HarteminkLab/NucID/blob/master/example/example.ipynb) contains an example on how to calculate moving window nucleosome scores. Each file in the [package](https://github.com/HarteminkLab/NucID/tree/master/NucID) has an accompany `IPython` notebook that explains the code. 
 
